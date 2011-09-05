@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PokerCardEvaluator", "src\PokerCardEvaluator\PokerCardEvaluator.fsproj", "{F2655A96-A2E3-49B5-B2DA-AE71367434E4}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PokerCardEvaluatorTests", "test\PokerCardEvaluatorTests\PokerCardEvaluatorTests.fsproj", "{DBFCCDB9-AA2F-4393-BEDC-18DE679D4AB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2655A96-A2E3-49B5-B2DA-AE71367434E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2655A96-A2E3-49B5-B2DA-AE71367434E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2655A96-A2E3-49B5-B2DA-AE71367434E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2655A96-A2E3-49B5-B2DA-AE71367434E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBFCCDB9-AA2F-4393-BEDC-18DE679D4AB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBFCCDB9-AA2F-4393-BEDC-18DE679D4AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBFCCDB9-AA2F-4393-BEDC-18DE679D4AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBFCCDB9-AA2F-4393-BEDC-18DE679D4AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
