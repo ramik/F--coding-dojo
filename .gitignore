@@ -1,0 +1,7 @@
+[Oo]bj
+[Bb]in
+*.user
+*.suo
+_ReSharper.*
+*.resharper.user
+*.Publish.xml
