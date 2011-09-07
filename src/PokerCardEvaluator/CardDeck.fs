@@ -1,5 +1,4 @@
 ﻿module PokerCardEvaluator
-open Microsoft.FSharp.Reflection 
 
 type Suit = Heart | Diamond | Club | Spade
 type Card = | Ace of Suit | King of Suit | Queen of Suit | Jack of Suit
