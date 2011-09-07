@@ -16,7 +16,7 @@ type Card =
                                         | Jack(x) -> Format "Jack" x
 
 let GetFullCardsForSuit suit = seq { yield Ace(suit); yield King(suit); yield Queen(suit); yield Jack(suit)
-                                     for value in [2..10] do yield ValueCard(value, suit); }
+                                     yield! [2..10] |> Seq.map (fun c -> ValueCard(c, suit)); }
 
 let private GetDeck = Seq.map (fun c -> GetFullCardsForSuit c) >> Seq.concat
 let Deck = GetDeck [Heart;Diamond;Club;Spade]
