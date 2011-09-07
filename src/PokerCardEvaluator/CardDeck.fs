@@ -1,11 +1,17 @@
-﻿module PokerCardEvaluator
+﻿module Cards
+open System
 
 type Suit = Heart | Diamond | Club | Spade
-type Card = | Ace of Suit | King of Suit | Queen of Suit | Jack of Suit
-            | ValueCard of int * Suit
+            override this.ToString() = match this with | Heart -> "Heart" | Diamond -> "Diamond" 
+                                                       | Club -> "Club" | Spade -> "Spade"
+type Card =
+    | Ace of Suit | King of Suit | Queen of Suit | Jack of Suit
+    | ValueCard of int * Suit
+    override this.ToString() = match this with | ValueCard(a, b) -> String.Format ("{0} of {1}", a, b)
+                                               | _ -> "foo"
 
 let GetFullCardsForSuit suit = seq { yield Ace(suit); yield King(suit); yield Queen(suit); yield Jack(suit)
                                      for value in [2..10] do yield ValueCard(value, suit); }
 
-let GetDeck = Seq.map (fun c -> GetFullCardsForSuit c) >> Seq.concat
+let private GetDeck = Seq.map (fun c -> GetFullCardsForSuit c) >> Seq.concat
 let Deck = GetDeck [Heart;Diamond;Club;Spade]

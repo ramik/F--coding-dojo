@@ -1,7 +1,7 @@
-﻿module PokerCardEvaluatorTest
+﻿module CardDeckTest
 
 open Xunit
-open PokerCardEvaluator
+open Cards
 
 let fullSuiteOf = function | x -> [Ace(x);King(x);Queen(x);Jack(x);ValueCard(2, x); 
                                    ValueCard(3, x);ValueCard(4, x);ValueCard(5, x);ValueCard(6, x);

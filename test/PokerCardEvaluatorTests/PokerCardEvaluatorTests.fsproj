@@ -42,7 +42,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PokerCardEvaluationTest.fs" />
+    <Compile Include="CardDeckTest.fs" />
+    <Compile Include="PokerCardEvaluatorTest.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
   <ItemGroup>
