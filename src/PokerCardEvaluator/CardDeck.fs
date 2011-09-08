@@ -7,6 +7,12 @@ type Suit = Heart | Diamond | Club | Spade
 type Card =
     | Ace of Suit | King of Suit | Queen of Suit | Jack of Suit
     | ValueCard of int * Suit
+    member this.FaceValue = 
+        match this with | Ace(_) -> 14
+                        | King(_) -> 13
+                        | Queen(_) -> 12
+                        | Jack(_) -> 11
+                        | ValueCard(x, _) -> x
     override this.ToString() = 
                         let Format a b = String.Format ("{0} of {1}", a, b)
                         match this with | ValueCard(a, b) -> Format a b
