@@ -6,4 +6,3 @@
 open Xunit
 open Cards
 open PokerCardEvaluator
-ShuffleCards (new System.Random()) Deck;;
