@@ -35,3 +35,10 @@ let FindsTwoPairsFromHand() =
                  EvaluateHand [Ace(Diamond); Ace(Club); ValueCard(8, Spade); ValueCard(8, Diamond); King(Heart)])
    Assert.Equal (TwoPairs(Pair({ value = 13; shark = None}), Pair({value=3; shark = None }), Some(8)),
                  EvaluateHand [ValueCard(3, Diamond); King(Club); ValueCard(3, Spade); ValueCard(8, Diamond); King(Heart)])
+
+[<Fact>]
+let FindsFullHousesFromHand() = 
+   Assert.Equal (FullHouse(ThreeOfKind({ value = 14; shark = None}), Pair({value=8; shark = None })),
+                 EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); ValueCard(8, Heart)])
+   Assert.Equal (FullHouse(ThreeOfKind({ value = 13; shark = None}), Pair({value=3; shark = None })),
+                 EvaluateHand [ValueCard(3, Diamond); King(Club); ValueCard(3, Spade); King(Diamond); King(Heart)])
