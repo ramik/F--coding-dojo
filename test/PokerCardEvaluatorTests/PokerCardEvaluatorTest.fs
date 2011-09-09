@@ -16,15 +16,22 @@ let DeckGetsShuffledWithSeed3() =
 
 [<Fact>]
 let FindsPairFromHand() = 
-   Assert.Equal (Pair({value = 14; shark = 11}), EvaluateHand [Ace(Diamond); ValueCard(5, Club); Ace(Spade); ValueCard(8, Diamond); Jack(Diamond)])
-   Assert.Equal (Pair({value = 11; shark = 14}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Ace(Spade); ValueCard(8, Diamond); Jack(Club)])
+   Assert.Equal (Pair({value = 14; shark = Some(11)}), EvaluateHand [Ace(Diamond); ValueCard(5, Club); Ace(Spade); ValueCard(8, Diamond); Jack(Diamond)])
+   Assert.Equal (Pair({value = 11; shark = Some(14)}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Ace(Spade); ValueCard(8, Diamond); Jack(Club)])
 
 [<Fact>]
 let FindsThreeOfKindFromHand() = 
-   Assert.Equal (ThreeOfKind({value = 14; shark = 11}), EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); Jack(Diamond)])
-   Assert.Equal (ThreeOfKind({value = 11; shark = 8}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Jack(Spade); ValueCard(8, Diamond); Jack(Club)])
+   Assert.Equal (ThreeOfKind({value = 14; shark = Some(11)}), EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); Jack(Diamond)])
+   Assert.Equal (ThreeOfKind({value = 11; shark = Some(8)}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Jack(Spade); ValueCard(8, Diamond); Jack(Club)])
 
 [<Fact>]
 let FindsFourOfKindFromHand() = 
-   Assert.Equal (FourOfKind({value = 14; shark = 8}), EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); Ace(Heart)])
-   Assert.Equal (FourOfKind({value = 11; shark = 5}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Jack(Spade); Jack(Heart); Jack(Club)])
+   Assert.Equal (FourOfKind({value = 14; shark = Some(8)}), EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); Ace(Heart)])
+   Assert.Equal (FourOfKind({value = 11; shark = Some(5)}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Jack(Spade); Jack(Heart); Jack(Club)])
+
+[<Fact>]
+let FindsTwoPairsFromHand() = 
+   Assert.Equal (TwoPairs(Pair({ value = 14; shark = None}), Pair({value=8; shark = None }), Some(13)),
+                 EvaluateHand [Ace(Diamond); Ace(Club); ValueCard(8, Spade); ValueCard(8, Diamond); King(Heart)])
+   Assert.Equal (TwoPairs(Pair({ value = 13; shark = None}), Pair({value=3; shark = None }), Some(8)),
+                 EvaluateHand [ValueCard(3, Diamond); King(Club); ValueCard(3, Spade); ValueCard(8, Diamond); King(Heart)])
