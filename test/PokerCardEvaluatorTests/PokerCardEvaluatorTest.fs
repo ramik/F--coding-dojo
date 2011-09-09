@@ -24,4 +24,7 @@ let FindsThreeOfKindFromHand() =
    Assert.Equal (ThreeOfKind({value = 14; shark = 11}), EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); Jack(Diamond)])
    Assert.Equal (ThreeOfKind({value = 11; shark = 8}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Jack(Spade); ValueCard(8, Diamond); Jack(Club)])
 
-    
+[<Fact>]
+let FindsFourOfKindFromHand() = 
+   Assert.Equal (FourOfKind({value = 14; shark = 8}), EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); Ace(Heart)])
+   Assert.Equal (FourOfKind({value = 11; shark = 5}), EvaluateHand [Jack(Diamond); ValueCard(5, Club); Jack(Spade); Jack(Heart); Jack(Club)])

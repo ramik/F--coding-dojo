@@ -24,6 +24,7 @@ let EvaluatePairs (hand : seq<Card>) =
        match sortedpairs with 
              | (a, b) :: (c, d) :: _ when b = 2 -> Some(Pair({ value = a; shark = c }))
              | (a, b) :: (c, d) :: _ when b = 3 -> Some(ThreeOfKind({ value = a; shark = c }))
+             | (a, b) :: (c, d) :: _ when b = 4 -> Some(FourOfKind({ value = a; shark = c }))
              | _ -> None
 
 let EvaluateHand (hand : seq<Card>) = 
