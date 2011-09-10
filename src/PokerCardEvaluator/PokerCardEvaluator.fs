@@ -22,15 +22,15 @@ type Hand = | OnlyShark of Shark
 let EvaluatePairs (hand : seq<Card>) =
        let sortedpairs = hand |> Seq.countBy (fun c -> c.FaceValue) |> Seq.sortBy (fun (b, a) -> -a * 20 - b) |> Seq.toList
        match sortedpairs with 
-             | (a, b) :: (c, d) :: (e, f) :: _ when b = 2 && d = 2 ->
-                           Some(TwoPairs(Pair({ value = a; shark = None }), 
-                                         Pair({ value = c; shark = None }), Some(e)))
-             | (a, b) :: (c, d) :: _ when b = 2 -> Some(Pair({ value = a; shark = Some(c) }))
-             | (a, b) :: (c, d) :: _ when b = 3 && d = 2 ->
-                           Some(FullHouse(ThreeOfKind({ value = a; shark = None }), 
-                                          Pair({ value = c; shark = None })))
-             | (a, b) :: (c, d) :: _ when b = 3 -> Some(ThreeOfKind({ value = a; shark = Some(c) }))
-             | (a, b) :: (c, d) :: _ when b = 4 -> Some(FourOfKind({ value = a; shark = Some(c) }))
+             | (firstValue, countA) :: (secondValue, countB) :: (thirdValue, _) :: _ when countA = 2 && countB = 2 ->
+                           Some(TwoPairs(Pair({ value = firstValue; shark = None }), 
+                                         Pair({ value = secondValue; shark = None }), Some(thirdValue)))
+             | (firstValue, count) :: (secondValue, _) :: _ when count = 2 -> Some(Pair({ value = firstValue; shark = Some(secondValue) }))
+             | (firstValue, countA) :: (secondValue, countB) :: _ when countA = 3 && countB = 2 ->
+                           Some(FullHouse(ThreeOfKind({ value = firstValue; shark = None }), 
+                                          Pair({ value = secondValue; shark = None })))
+             | (firstValue, count) :: (secondValue, _) :: _ when count = 3 -> Some(ThreeOfKind({ value = firstValue; shark = Some(secondValue) }))
+             | (firstValue, count) :: (secondValue, _) :: _ when count = 4 -> Some(FourOfKind({ value = firstValue; shark = Some(secondValue) }))
              | _ -> None
 
 let EvaluateHand (hand : seq<Card>) = 
