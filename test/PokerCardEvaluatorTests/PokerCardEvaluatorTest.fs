@@ -64,3 +64,10 @@ let FindStraightFlushFromHand() =
                  EvaluateHand [Jack(Spade); ValueCard(10, Spade); Queen(Spade); ValueCard(8, Spade); ValueCard(9, Spade)])
    Assert.Equal (StraightFlush(Some(5)),
                  EvaluateHand [ValueCard(5, Diamond); ValueCard(4, Diamond); Ace(Diamond); ValueCard(2, Diamond); ValueCard(3, Diamond)])
+
+[<Fact>]
+let FindOnlySharkFromHand() = 
+   Assert.Equal (OnlyShark(Some(12)),
+                 EvaluateHand [Jack(Spade); ValueCard(3, Club); Queen(Spade); ValueCard(8, Spade); ValueCard(9, Spade)])
+   Assert.Equal (OnlyShark(Some(8)),
+                 EvaluateHand [ValueCard(5, Diamond); ValueCard(4, Club); ValueCard(6, Diamond); ValueCard(8, Diamond); ValueCard(3, Diamond)])
