@@ -13,6 +13,12 @@ type Card =
                         | Queen(_) -> 12
                         | Jack(_) -> 11
                         | ValueCard(x, _) -> x
+    member this.Suit = 
+        match this with | Ace(x) -> x
+                        | King(x) -> x
+                        | Queen(x) -> x
+                        | Jack(x) -> x
+                        | ValueCard(_, x) -> x
     override this.ToString() = 
                         let Format a b = String.Format ("{0} of {1}", a, b)
                         match this with | ValueCard(a, b) -> Format a b

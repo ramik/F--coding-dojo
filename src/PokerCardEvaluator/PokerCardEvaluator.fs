@@ -18,6 +18,9 @@ type Hand = | OnlyShark of Shark
             | TwoPairs of Hand * Hand * Shark
             | ThreeOfKind of Duplicates
             | FullHouse of Hand * Hand
+            | Straight of Shark
+            | Flush of Shark
+            | StraightFlush of Hand * Hand
 
 let EvaluatePairs (hand : seq<Card>) =
        let sortedpairs = hand |> Seq.countBy (fun c -> c.FaceValue) |> Seq.sortBy (fun (b, a) -> -a * 20 - b) |> Seq.toList
@@ -33,9 +36,18 @@ let EvaluatePairs (hand : seq<Card>) =
              | (firstValue, count) :: (secondValue, _) :: _ when count = 4 -> Some(FourOfKind({ value = firstValue; shark = Some(secondValue) }))
              | _ -> None
 
+let EvaluateStraightAndflushes (hand : seq<Card>) =
+    let isFlush = hand |> Seq.windowed 2 |> Seq.forall (fun c -> c.[0].Suit = c.[1].Suit)
+    let GetHighest = hand |> Seq.sortBy (fun c -> -c.FaceValue) |> Seq.head |> (fun c -> c.FaceValue)
+    match isFlush with | true -> Some(Flush (Some(GetHighest)))
+                       | false -> None
+
+
 let EvaluateHand (hand : seq<Card>) = 
-    let eval = EvaluatePairs hand
-    match eval with | Some(x) -> x
-                    | None -> raise (NotImplementedException("only ponies"))                                  
+    let duplicates = EvaluatePairs hand
+    let combinations = EvaluateStraightAndflushes hand
+    match duplicates, combinations with | Some(x), _ -> x
+                                        | _, Some(x) -> x
+                                        | None, None -> raise (NotImplementedException("only ponies"))                                  
 
 GetHand Deck |> EvaluateHand |> ignore

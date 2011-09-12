@@ -42,3 +42,11 @@ let FindsFullHousesFromHand() =
                  EvaluateHand [Ace(Diamond); Ace(Club); Ace(Spade); ValueCard(8, Diamond); ValueCard(8, Heart)])
    Assert.Equal (FullHouse(ThreeOfKind({ value = 13; shark = None}), Pair({value=3; shark = None })),
                  EvaluateHand [ValueCard(3, Diamond); King(Club); ValueCard(3, Spade); King(Diamond); King(Heart)])
+
+[<Fact>]
+let FindsFlushFromHand() = 
+   Assert.Equal (Flush(Some(8)),
+                 EvaluateHand [ValueCard(5, Diamond); ValueCard(4, Diamond); ValueCard(7, Diamond); ValueCard(2, Diamond); ValueCard(8, Diamond)])
+   Assert.Equal (Flush(Some(12)),
+                 EvaluateHand [ValueCard(9, Diamond); ValueCard(4, Diamond); Queen(Diamond); ValueCard(2, Diamond); ValueCard(8, Diamond)])
+ 
