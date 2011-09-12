@@ -20,7 +20,7 @@ type Hand = | OnlyShark of Shark
             | FullHouse of Hand * Hand
             | Straight of Shark
             | Flush of Shark
-            | StraightFlush of Hand * Hand
+            | StraightFlush of Shark
 
 let EvaluatePairs (hand : seq<Card>) =
        let sortedpairs = hand |> Seq.countBy (fun c -> c.FaceValue) |> Seq.sortBy (fun (b, a) -> -a * 20 - b) |> Seq.toList
@@ -39,9 +39,17 @@ let EvaluatePairs (hand : seq<Card>) =
 let EvaluateStraightAndflushes (hand : seq<Card>) =
     let isFlush = hand |> Seq.windowed 2 |> Seq.forall (fun c -> c.[0].Suit = c.[1].Suit)
     let GetHighest = hand |> Seq.sortBy (fun c -> -c.FaceValue) |> Seq.head |> (fun c -> c.FaceValue)
-    match isFlush with | true -> Some(Flush (Some(GetHighest)))
-                       | false -> None
-
+    let isStraight = 
+          let ordered = hand |> Seq.sortBy (fun c -> c.FaceValue)
+          let zipped = ordered |> Seq.skip 1 |> Seq.zip ordered |> Seq.forall (fun c -> (fst c).FaceValue + 1 = (snd c).FaceValue)
+          match zipped, Seq.toList ordered with 
+                    | true, _ -> (true, GetHighest)
+                    | _, ValueCard(2, _) :: ValueCard(3, _) :: ValueCard(4, _) :: ValueCard(5, _) :: Ace(_) :: _ -> (true, 5)
+                    | _ -> (false, 0)
+    match isFlush, isStraight with | true, (true, x) -> Some(StraightFlush (Some(x)))
+                                   | true, _ -> Some(Flush (Some(GetHighest)))
+                                   | _, (true, x) -> Some(Straight(Some(x)))
+                                   | _, _ -> None
 
 let EvaluateHand (hand : seq<Card>) = 
     let duplicates = EvaluatePairs hand

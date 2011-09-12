@@ -49,4 +49,18 @@ let FindsFlushFromHand() =
                  EvaluateHand [ValueCard(5, Diamond); ValueCard(4, Diamond); ValueCard(7, Diamond); ValueCard(2, Diamond); ValueCard(8, Diamond)])
    Assert.Equal (Flush(Some(12)),
                  EvaluateHand [ValueCard(9, Diamond); ValueCard(4, Diamond); Queen(Diamond); ValueCard(2, Diamond); ValueCard(8, Diamond)])
+
+
+[<Fact>]
+let FindStraightFromHand() = 
+   Assert.Equal (Straight(Some(12)),
+                 EvaluateHand [Jack(Heart); ValueCard(10, Diamond); Queen(Diamond); ValueCard(8, Spade); ValueCard(9, Diamond)])
+   Assert.Equal (Straight(Some(5)),
+                 EvaluateHand [ValueCard(5, Diamond); ValueCard(4, Diamond); Ace(Diamond); ValueCard(2, Diamond); ValueCard(3, Spade)])
  
+[<Fact>]
+let FindStraightFlushFromHand() = 
+   Assert.Equal (StraightFlush(Some(12)),
+                 EvaluateHand [Jack(Spade); ValueCard(10, Spade); Queen(Spade); ValueCard(8, Spade); ValueCard(9, Spade)])
+   Assert.Equal (StraightFlush(Some(5)),
+                 EvaluateHand [ValueCard(5, Diamond); ValueCard(4, Diamond); Ace(Diamond); ValueCard(2, Diamond); ValueCard(3, Diamond)])
