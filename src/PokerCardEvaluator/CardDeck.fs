@@ -28,7 +28,21 @@ type Card =
                                         | Jack(x) -> Format "Jack" x
 
 let GetFullCardsForSuit suit = seq { yield Ace(suit); yield King(suit); yield Queen(suit); yield Jack(suit)
-                                     yield! [2..10] |> Seq.map (fun c -> ValueCard(c, suit)); }
+                                     yield! [2..10] |> Seq.map (fun c -> ValueCard(c, suit)); } |> Seq.toList
 
-let private GetDeck = Seq.map (fun c -> GetFullCardsForSuit c) >> Seq.concat
-let Deck = GetDeck [Heart;Diamond;Club;Spade]
+let private GetDeck = List.map (fun c -> GetFullCardsForSuit c) >> List.concat
+
+let ShuffleCards (random : Random) = List.map (fun c -> (random.Next(), c)) >>
+                                     List.sortBy (fun (a, _) -> a) >>
+                                     List.map (fun (_, b) -> b)
+
+let GetShuffledDeck deck = ShuffleCards (new System.Random()) deck
+let GetHand deck = deck |> GetShuffledDeck |> Seq.take 5
+
+type Deck() = 
+  let mutable deck = GetDeck [Heart;Diamond;Club;Spade] 
+  member this.DrawHand = deck <- GetShuffledDeck deck
+                         let hand = Seq.take 5 deck
+                         deck <- Seq.skip 5 deck |> Seq.toList
+                         Seq.toList hand
+  member this.Deck = deck 

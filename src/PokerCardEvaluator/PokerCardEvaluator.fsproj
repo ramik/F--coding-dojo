@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{f2655a96-a2e3-49b5-b2da-ae71367434e4}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>PokerCardEvaluator</RootNamespace>
     <AssemblyName>PokerCardEvaluator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
